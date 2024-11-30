@@ -1,5 +1,10 @@
 {
   "donationPage": {
-    "hello": "Hallo"
+    "hello": "Hallo",
+    "makeDonation": "Doneer met Almogamma",
+
+    "ar": "العربية",
+    "en": "English",
+    "de": "Deutsche"
   }
 }

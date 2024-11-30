@@ -1,5 +1,30 @@
 {
   "donationPage": {
-    "hello": "مرحبًا"
+    "hello": "مرحبًا",
+    "makeDonation": "تبرع مع المجمع الإسلامي",
+
+    "ar": "العربية",
+    "en": "English",
+    "de": "Deutsche",
+
+    "donationAmount": "قيمة التبرع",
+    "quantity": "الكمية",
+    "itemCost": "تكلفة الوحدة الواحدة",
+    "totalDonation": "إجمالي قيمة التبرع هو",
+
+    "feeCoverage": "تحمل الرسوم",
+    "feeCoverageAck": "أرغب بتحمل رسوم التحويل للتأكد من التبرع بكامل المبلغ للمجمع الإسلامي",
+
+    "personalInfo": "البيانات الشخصية",
+    "name": "الإسم",
+    "email": "البريد الإلكتروني",
+    "mobile": "الهاتف",
+    "street": "الشارع",
+    "city": "المدينة",
+    "country": "البلد",
+    "required": "هذا المدخل مطلوب",
+    "invalidEmail": "البريد الإلكتروني غير صحيح",
+
+    "checkout": "الدفع"
   }
 }

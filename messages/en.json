@@ -1,5 +1,30 @@
 {
   "donationPage": {
-    "hello": "Hello"
+    "hello": "Hello",
+    "makeDonation": "Donate with Almogamma",
+
+    "ar": "العربية",
+    "en": "English",
+    "de": "Deutsche",
+
+    "donationAmount": "Donation Amount",
+    "quantity": "Quantity",
+    "itemCost": "Each donation item costs",
+    "totalDonation": "Total amount of donation is",
+
+    "feeCoverage": "Fee Coverage",
+    "feeCoverageAck": "I want to cover the processing fees to ensure that 100% of my donation goes to Almogamma",
+
+    "personalInfo": "Personal Information",
+    "name": "Name",
+    "email": "Email",
+    "mobile": "Mobile",
+    "street": "Street",
+    "city": "City",
+    "country": "Country",
+    "required": "This field is required",
+    "invalidEmail": "This email is invalid",
+
+    "checkout": "Checkout"
   }
 }
