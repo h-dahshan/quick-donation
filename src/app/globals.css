@@ -2,17 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Arabic font for RTL layout */
+html[lang="ar"] body {
+  direction: rtl;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-}
+} */
 
 body {
   color: var(--foreground);
