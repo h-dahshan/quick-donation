@@ -28,6 +28,7 @@ export default function LocaleSwitcher({
   const router = useRouter();
   const pathname = usePathname();
   const params = useParams();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isPending, startTransition] = useTransition();
 
   function handleLocaleChange(locale: string) {

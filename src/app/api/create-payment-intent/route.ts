@@ -8,6 +8,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 
 export async function POST(req: NextRequest) {
   const { data } = await req.json();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { customer, amount } = data;
   try {
     const paymentIntent = await stripe.paymentIntents.create({
@@ -16,6 +17,7 @@ export async function POST(req: NextRequest) {
     });
 
     return new NextResponse(paymentIntent.client_secret, { status: 200 });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     console.log(error);
     return new NextResponse(error, {
