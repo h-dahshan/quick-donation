@@ -16,6 +16,13 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -44,7 +51,7 @@ export default function DonationForm() {
         street: z.string().min(1, t("required")),
         city: z.string().min(1, t("required")),
         country: z.string().min(1, t("required")),
-        quantity: z.number().min(1, t("required")),
+        quantity: z.string().min(1, t("required")),
         coverFee: z.boolean(),
       })
     ),
@@ -55,7 +62,7 @@ export default function DonationForm() {
       street: "",
       city: "",
       country: "",
-      quantity: 1,
+      quantity: "1",
       coverFee: false,
     },
   });
@@ -71,12 +78,12 @@ export default function DonationForm() {
     street: string;
     city: string;
     country: string;
-    quantity: number;
+    quantity: string;
     coverFee: boolean;
   }) {
     const { name, email, mobile, street, city, country, quantity } = values;
     const customer = { name, email, mobile, street, city, country };
-    const postReqPayload = { customer, amount: quantity * 100 };
+    const postReqPayload = { customer, amount: parseInt(quantity) * 100 };
 
     try {
       if (!stripe || !elements) return null;
@@ -116,17 +123,27 @@ export default function DonationForm() {
               <FormField
                 control={form.control}
                 name="quantity"
-                render={({ field: { value, onChange, ...rest } }) => (
+                render={({ field }) => (
                   <FormItem>
                     <FormLabel required>{t("quantity")}</FormLabel>
                     <FormControl>
-                      <Input
-                        type="number"
-                        min={1}
-                        value={value}
-                        onChange={(e) => onChange(Number(e.target.value || 1))}
-                        {...rest}
-                      />
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select a verified email to display" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          {Array.from({ length: 10 }).map((_, idx) => (
+                            <SelectItem key={idx} value={`${idx + 1}`}>
+                              {idx + 1}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -257,7 +274,7 @@ export default function DonationForm() {
           <p className="">
             {t("totalDonation")}{" "}
             <span className="text-green-600">
-              {"€" + (100 * form.getValues().quantity).toFixed(2)}
+              {"€" + (parseInt(form.getValues().quantity) * 100).toFixed(2)}
             </span>
           </p>
 
