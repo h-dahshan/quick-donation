@@ -99,7 +99,7 @@ export default function DonationForm() {
         elements,
         clientSecret: data,
         confirmParams: {
-          return_url: `${window.origin}?session_id={CHECKOUT_SESSION_ID}`,
+          return_url: `${window.origin}/success`,
         },
       });
 
@@ -270,10 +270,10 @@ export default function DonationForm() {
         <div
           className={cn([
             "flex flex-col justify-between align-bottom gap-2 md:flex-row",
-            intentDone && "flex-col",
+            intentDone && "md:flex-col",
           ])}
         >
-          <p className="">
+          <p>
             {t("totalDonation")}{" "}
             <span className="text-green-600">
               {"€" + (parseInt(form.getValues().quantity) * 100).toFixed(2)}
@@ -281,8 +281,14 @@ export default function DonationForm() {
           </p>
 
           {/* STIPE */}
-          <div className={cn([!intentDone && "invisible max-w-0 max-h-0"])}>
+          <div
+            className={cn([
+              "flex flex-col",
+              !intentDone && "invisible max-w-0 max-h-0",
+            ])}
+          >
             <PaymentElement options={{ layout: { type: "accordion" } }} />
+            <Button onClick={() => elements?.submit()}>{t("pay")}</Button>
           </div>
 
           {!intentDone && <Button type="submit">{t("checkout")}</Button>}
