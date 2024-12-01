@@ -25,6 +25,7 @@
     "required": "This field is required",
     "invalidEmail": "This email is invalid",
 
-    "checkout": "Checkout"
+    "checkout": "Checkout",
+    "pay": "Pay Now"
   }
 }

@@ -62,10 +62,11 @@ export default function DonationPage({
             <Elements
               stripe={stripePromise}
               options={{
+                amount: 100,
                 appearance: { theme: "stripe" },
                 locale: locale,
                 currency: "eur",
-                mode: "setup",
+                mode: "payment",
               }}
             >
               <DonationForm />
