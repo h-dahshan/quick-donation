@@ -1,5 +1,7 @@
 "use client";
 
+import { use } from "react";
+
 import Image from "next/image";
 
 import { useTranslations } from "next-intl";
@@ -22,14 +24,16 @@ import DonationForm from "./components/DonationForm";
 const stripePromise = getStripe();
 
 export default function DonationPage({
-  params: { locale },
+  params,
 }: Readonly<{
-  params: { locale: "ar" | "en" | "de" };
+  params: Promise<{ locale: "ar" | "en" | "de" }>;
 }>) {
+  const { locale } = use(params);
+
   const t = useTranslations("donationPage");
 
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+    <div className="flex justify-center min-h-screen py-10 px-20 gap-16 sm:p-8 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start lg:w-[620px] md:w-[560px] sm:w-[380px]">
         <Card className="w-full">
           <CardHeader>
@@ -55,7 +59,15 @@ export default function DonationPage({
           <Separator />
 
           <CardContent className="pt-6">
-            <Elements stripe={stripePromise}>
+            <Elements
+              stripe={stripePromise}
+              options={{
+                appearance: { theme: "stripe" },
+                locale: locale,
+                currency: "eur",
+                mode: "setup",
+              }}
+            >
               <DonationForm />
             </Elements>
           </CardContent>

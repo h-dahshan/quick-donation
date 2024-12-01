@@ -1,10 +1,30 @@
 {
   "donationPage": {
     "hello": "Hallo",
-    "makeDonation": "Doneer met Almogamma",
+    "makeDonation": "Spenden mit Almogamma",
 
     "ar": "العربية",
     "en": "English",
-    "de": "Deutsche"
+    "de": "Deutsche",
+
+    "donationAmount": "Spendenbetrag",
+    "quantity": "Menge",
+    "itemCost": "Jeder Spendenartikel kostet",
+    "totalDonation": "Der Gesamtbetrag der Spende beträgt",
+
+    "feeCoverage": "Gebührenabdeckung",
+    "feeCoverageAck": "Ich möchte die Bearbeitungsgebühren übernehmen, damit 100 % meiner Spende an Almogamma gehen.",
+
+    "personalInfo": "Persönliche Informationen",
+    "name": "Name",
+    "email": "E-Mail",
+    "mobile": "Mobil",
+    "street": "Straße",
+    "city": "Stadt",
+    "country": "Land",
+    "required": "Dieses Feld ist erforderlich",
+    "invalidEmail": "Diese E-Mail ist ungültig",
+
+    "checkout": "Bezahlen"
   }
 }
