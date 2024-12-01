@@ -1,12 +1,12 @@
 import { NextResponse, NextRequest } from "next/server";
 import Stripe from "stripe";
 
-export async function POST(req: NextRequest) {
-  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-    typescript: true,
-    apiVersion: "2024-11-20.acacia",
-  });
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+  typescript: true,
+  apiVersion: "2024-06-20",
+});
 
+export async function POST(req: NextRequest) {
   const { data } = await req.json();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { customer, amount } = data;
