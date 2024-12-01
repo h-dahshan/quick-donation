@@ -262,12 +262,14 @@ export default function DonationForm() {
                 )}
               />
             </FormSection>
+
+            <Separator className="my-6" />
           </>
         )}
 
         <div
           className={cn([
-            "flex justify-between align-bottom gap-2",
+            "flex flex-col justify-between align-bottom gap-2 md:flex-row",
             intentDone && "flex-col",
           ])}
         >
