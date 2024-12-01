@@ -33,8 +33,8 @@ export default function DonationPage({
   const t = useTranslations("donationPage");
 
   return (
-    <div className="flex justify-center min-h-screen py-10 px-20 gap-16 sm:p-8 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start lg:w-[620px] md:w-[560px] sm:w-[380px]">
+    <div className="flex justify-center max-h-screen py-10 px-5 font-[family-name:var(--font-geist-sans)]">
+      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start lg:w-[620px] md:w-[560px] sm:w-[420px]">
         <Card className="w-full">
           <CardHeader>
             <CardTitle className="flex justify-between">
