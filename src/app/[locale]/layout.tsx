@@ -49,7 +49,15 @@ export default async function LocaleLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <NextIntlClientProvider messages={messages}>
-          {children}
+          <div className="flex justify-center max-h-screen py-10 px-5 font-[family-name:var(--font-geist-sans)]">
+            <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start lg:w-[620px] md:w-[560px] sm:w-[420px]">
+              {children}
+            </main>
+          </div>
+
+          {/* <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
+            Write Footer Here
+          </footer> */}
         </NextIntlClientProvider>
       </body>
     </html>
