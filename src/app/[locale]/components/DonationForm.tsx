@@ -77,16 +77,12 @@ export default function DonationForm() {
     quantity: string;
     coverFee: boolean;
   }) {
-    const { name, email, mobile, street, city, country, quantity } = values;
-    const customer = { name, email, mobile, street, city, country };
-    const postReqPayload = { customer, amount: parseInt(quantity) * 100 };
-
     try {
       if (!stripe || !elements) return null;
 
       // call server action to make a payment intent
       const { data } = await axios.post("/api/create-payment-intent", {
-        data: postReqPayload,
+        data: values,
       });
 
       elements.submit();
