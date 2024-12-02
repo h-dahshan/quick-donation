@@ -26,6 +26,14 @@
     "invalidEmail": "This email is invalid",
 
     "checkout": "Checkout",
-    "pay": "Pay Now"
+    "pay": "Pay Now",
+
+    "donationSuccess": "Donation Succeeded",
+    "thankYou": "Thank you for your donation with Almogamma.",
+    "donationFailure": "Donation Failed",
+    "sorry": "Sorry, your donation with Almogamma hasn't succeeded.",
+    "youCan": "You can",
+    "goHome": "Go to Home",
+    "tryAgain": "Try again"
   }
 }

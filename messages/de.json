@@ -26,6 +26,14 @@
     "invalidEmail": "Diese E-Mail ist ungültig",
 
     "checkout": "Bezahlen",
-    "pay": "Jetzt bezahlen"
+    "pay": "Jetzt bezahlen",
+
+    "donationSuccess": "Spende erfolgreich",
+    "thankYou": "Vielen Dank für Ihre Spende bei Almogamma.",
+    "donationFailure": "Spende fehlgeschlagen",
+    "sorry": "Entschuldigung, Ihre Spende bei Almogamma war nicht erfolgreich.",
+    "youCan": "Sie können",
+    "goHome": "Zur Startseite gehen",
+    "tryAgain": "Erneut versuchen"
   }
 }
