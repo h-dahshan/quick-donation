@@ -49,8 +49,8 @@ export default async function LocaleLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <NextIntlClientProvider messages={messages}>
-          <div className="flex justify-center max-h-screen py-10 px-5 font-[family-name:var(--font-geist-sans)]">
-            <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start lg:w-[620px] md:w-[560px] sm:w-[420px]">
+          <div className="flex justify-center min-h-screen py-10 px-5 font-[family-name:var(--font-geist-sans)]">
+            <main className="flex flex-col items-center gap-8 sm:items-start lg:w-[620px] md:w-[560px] sm:w-[420px]">
               {children}
             </main>
           </div>
