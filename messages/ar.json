@@ -8,9 +8,12 @@
     "de": "Deutsche",
 
     "donationAmount": "قيمة التبرع",
+    "pleaseSelectAmount": "برجاء إختيار قيمة التبرع",
     "quantity": "الكمية",
     "itemCost": "تكلفة الوحدة الواحدة",
     "totalDonation": "إجمالي قيمة التبرع هو",
+    "other": "أخرى",
+    "customAmount": "قيمة التبرع",
 
     "feeCoverage": "تحمل الرسوم",
     "feeCoverageAck": "أرغب بتحمل رسوم التحويل للتأكد من التبرع بكامل المبلغ للمجمع الإسلامي",

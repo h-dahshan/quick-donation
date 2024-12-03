@@ -16,13 +16,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -38,22 +32,41 @@ import {
   useStripe,
 } from "@stripe/react-stripe-js";
 
+const i18nCurrency = new Intl.NumberFormat("de-DE", {
+  style: "currency",
+  currency: "EUR",
+});
+
 export default function DonationForm() {
   const t = useTranslations("donationPage");
   const locale = useLocale();
 
   const form = useForm({
+    mode: "onChange",
     resolver: zodResolver(
-      z.object({
-        name: z.string().min(1, t("required")),
-        email: z.string().min(1, t("required")).email(t("invalidEmail")),
-        mobile: z.string().min(1, t("required")),
-        street: z.string().min(1, t("required")),
-        city: z.string().min(1, t("required")),
-        country: z.string().min(1, t("required")),
-        quantity: z.string().min(1, t("required")),
-        coverFee: z.boolean(),
-      })
+      z
+        .object({
+          name: z.string().min(1, t("required")),
+          email: z.string().min(1, t("required")).email(t("invalidEmail")),
+          mobile: z.string().min(1, t("required")),
+          street: z.string().min(1, t("required")),
+          city: z.string().min(1, t("required")),
+          country: z.string().min(1, t("required")),
+          amount: z.enum(["50", "100", "200", "other"], {
+            message: t("required"),
+          }),
+          customAmount: z.number().min(1, t("required")),
+          coverFee: z.boolean(),
+        })
+        .superRefine(({ amount, customAmount }, ctx) => {
+          if (amount === "other" && !customAmount) {
+            ctx.addIssue({
+              code: "custom",
+              path: ["customAmount"],
+              message: t("required"),
+            });
+          }
+        })
     ),
     values: {
       name: "",
@@ -62,10 +75,13 @@ export default function DonationForm() {
       street: "",
       city: "",
       country: "",
-      quantity: "1",
+      amount: "",
+      customAmount: 0,
       coverFee: false,
     },
   });
+  const watchAmount = form.watch("amount");
+  const watchCustomAmount = form.watch("customAmount");
 
   const stripe = useStripe();
   const elements = useElements();
@@ -78,9 +94,16 @@ export default function DonationForm() {
     street: string;
     city: string;
     country: string;
-    quantity: string;
+    amount: string;
+    customAmount: number;
     coverFee: boolean;
   }) {
+    const { amount, customAmount, ...rest } = values;
+    const payload = {
+      ...rest,
+      amount: amount === "other" ? customAmount : parseInt(amount),
+    };
+
     setIsLoading(true);
 
     try {
@@ -88,7 +111,7 @@ export default function DonationForm() {
 
       // call server action to make a payment intent
       const { data } = await axios.post("/api/create-payment-intent", {
-        data: values,
+        data: payload,
       });
 
       elements.submit();
@@ -111,39 +134,86 @@ export default function DonationForm() {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-8">
         <FormSection label={t("donationAmount")}>
-          <p>
-            {t("itemCost")} <span className="text-green-600">{"€100.00"}</span>
-          </p>
-
           <FormField
             control={form.control}
-            name="quantity"
+            name="amount"
             render={({ field }) => (
               <FormItem>
-                <FormLabel required>{t("quantity")}</FormLabel>
+                <FormLabel required className="mb-5">
+                  {t("pleaseSelectAmount")}
+                </FormLabel>
                 <FormControl>
-                  <Select
+                  <RadioGroup
                     onValueChange={field.onChange}
                     defaultValue={field.value}
+                    className="flex flex-col gap-2"
                   >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select a verified email to display" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {Array.from({ length: 10 }).map((_, idx) => (
-                        <SelectItem key={idx} value={`${idx + 1}`}>
-                          {idx + 1}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                    <FormItem className="flex items-center space-x-2 space-y-0 border rounded-md py-2 px-4 has-[:checked]:border-emerald-500 has-[:checked]:bg-emerald-50">
+                      <FormControl>
+                        <RadioGroupItem value="50" />
+                      </FormControl>
+                      <FormLabel className="font-normal text-md w-full">
+                        {i18nCurrency.format(50)}
+                      </FormLabel>
+                    </FormItem>
+
+                    <FormItem className="flex items-center space-x-2 space-y-0 border rounded-md py-2 px-4 has-[:checked]:border-emerald-500 has-[:checked]:bg-emerald-50">
+                      <FormControl>
+                        <RadioGroupItem value="100" />
+                      </FormControl>
+                      <FormLabel className="font-normal text-md w-full">
+                        {i18nCurrency.format(100)}
+                      </FormLabel>
+                    </FormItem>
+
+                    <FormItem className="flex items-center space-x-2 space-y-0 border rounded-md py-2 px-4 has-[:checked]:border-emerald-500 has-[:checked]:bg-emerald-50">
+                      <FormControl>
+                        <RadioGroupItem value="200" />
+                      </FormControl>
+                      <FormLabel className="font-normal text-md w-full">
+                        {i18nCurrency.format(200)}
+                      </FormLabel>
+                    </FormItem>
+
+                    <FormItem className="flex items-center space-x-2 space-y-0 border rounded-md py-2 px-4 has-[:checked]:border-emerald-500 has-[:checked]:bg-emerald-50">
+                      <FormControl>
+                        <RadioGroupItem value="other" />
+                      </FormControl>
+                      <FormLabel className="font-normal text-md w-full">
+                        {t("other")}
+                      </FormLabel>
+                    </FormItem>
+                  </RadioGroup>
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
+
+          {watchAmount === "other" && (
+            <FormField
+              control={form.control}
+              name="customAmount"
+              render={({ field: { value, ...rest } }) => (
+                <FormItem>
+                  <FormLabel required>{t("customAmount")}</FormLabel>
+                  <FormControl>
+                    <Input
+                      {...rest}
+                      value={value || ""}
+                      onChange={(e) =>
+                        form.setValue(
+                          "customAmount",
+                          parseInt(e.target.value) || 0
+                        )
+                      }
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          )}
         </FormSection>
 
         <Separator className="my-6" />
@@ -264,7 +334,11 @@ export default function DonationForm() {
           <p>
             {t("totalDonation")}{" "}
             <span className="text-green-600">
-              {"€" + (parseInt(form.getValues().quantity) * 100).toFixed(2)}
+              {i18nCurrency.format(
+                watchAmount === "other"
+                  ? watchCustomAmount
+                  : parseInt(watchAmount) || 0
+              )}
             </span>
           </p>
 
@@ -274,7 +348,7 @@ export default function DonationForm() {
           </div>
 
           <Button type="submit" disabled={isLoading || !stripe || !elements}>
-            <Loader2 className="animate-spin" /> {t("pay")}
+            {isLoading && <Loader2 className="animate-spin" />} {t("pay")}
           </Button>
         </div>
       </form>

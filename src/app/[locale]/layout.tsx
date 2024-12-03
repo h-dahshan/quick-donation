@@ -50,7 +50,7 @@ export default async function LocaleLayout({
       >
         <NextIntlClientProvider messages={messages}>
           <div className="flex justify-center min-h-screen py-10 px-5 font-[family-name:var(--font-geist-sans)]">
-            <main className="flex flex-col items-center gap-8 sm:items-start lg:w-[620px] md:w-[560px] sm:w-[420px]">
+            <main className="flex flex-col items-center gap-8 lg:w-[620px] md:w-[560px] sm:w-[420px]">
               {children}
             </main>
           </div>

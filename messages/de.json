@@ -8,9 +8,12 @@
     "de": "Deutsche",
 
     "donationAmount": "Spendenbetrag",
+    "pleaseSelectAmount": "Bitte wählen Sie den Spendenbetrag aus",
     "quantity": "Menge",
     "itemCost": "Jeder Spendenartikel kostet",
     "totalDonation": "Der Gesamtbetrag der Spende beträgt",
+    "other": "Andere",
+    "customAmount": "Benutzerdefinierter Betrag",
 
     "feeCoverage": "Gebührenabdeckung",
     "feeCoverageAck": "Ich möchte die Bearbeitungsgebühren übernehmen, damit 100 % meiner Spende an Almogamma gehen.",
