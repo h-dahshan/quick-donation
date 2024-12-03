@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -21,6 +21,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Separator } from "@/components/ui/separator";
+import { Progress } from "@/components/ui/progress";
 import { Loader2 } from "lucide-react";
 
 import FormSection from "./FormSection";
@@ -41,6 +42,13 @@ export default function DonationForm() {
   const t = useTranslations("donationPage");
   const locale = useLocale();
 
+  const [totalDonations, setTotalDonations] = useState(0);
+  useEffect(() => {
+    axios.get("/api/total-donations").then(({ data }) => {
+      setTotalDonations(data.totalDonations);
+    });
+  }, []);
+
   const form = useForm({
     mode: "onChange",
     resolver: zodResolver(
@@ -55,7 +63,7 @@ export default function DonationForm() {
           amount: z.enum(["50", "100", "200", "other"], {
             message: t("required"),
           }),
-          customAmount: z.number().min(1, t("required")),
+          customAmount: z.number(),
           coverFee: z.boolean(),
         })
         .superRefine(({ amount, customAmount }, ctx) => {
@@ -132,6 +140,25 @@ export default function DonationForm() {
 
   return (
     <Form {...form}>
+      <div className="flex flex-col gap-2">
+        <p aria-label="total donations raised">
+          <span className="font-semibold text-xl text-emerald-600">
+            {i18nCurrency.format(totalDonations || 0)}
+          </span>
+          <span className="font-light text-3xl">{" / "}</span>
+          <span className="font-semibold text-2xl">
+            {i18nCurrency.format(350000)}
+          </span>
+        </p>
+
+        <Progress
+          value={(totalDonations / 350000) * 100}
+          className="w-full h-3 bg-emerald-50"
+        />
+      </div>
+
+      <Separator className="my-6" />
+
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-8">
         <FormSection label={t("donationAmount")}>
           <FormField
