@@ -8,9 +8,12 @@
     "de": "Deutsche",
 
     "donationAmount": "Donation Amount",
+    "pleaseSelectAmount": "Please select the donation amount",
     "quantity": "Quantity",
     "itemCost": "Each donation item costs",
     "totalDonation": "Total amount of donation is",
+    "other": "Other",
+    "customAmount": "Custome Amount",
 
     "feeCoverage": "Fee Coverage",
     "feeCoverageAck": "I want to cover the processing fees to ensure that 100% of my donation goes to Almogamma",
