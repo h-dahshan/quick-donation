@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -25,6 +27,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Separator } from "@/components/ui/separator";
+import { Loader2 } from "lucide-react";
 
 import FormSection from "./FormSection";
 
@@ -66,6 +69,7 @@ export default function DonationForm() {
 
   const stripe = useStripe();
   const elements = useElements();
+  const [isLoading, setIsLoading] = useState(false);
 
   async function onSubmit(values: {
     name: string;
@@ -77,6 +81,8 @@ export default function DonationForm() {
     quantity: string;
     coverFee: boolean;
   }) {
+    setIsLoading(true);
+
     try {
       if (!stripe || !elements) return null;
 
@@ -97,6 +103,8 @@ export default function DonationForm() {
     } catch (error) {
       console.log(error);
     }
+
+    setIsLoading(false);
   }
 
   return (
@@ -265,7 +273,9 @@ export default function DonationForm() {
             <PaymentElement options={{ layout: { type: "auto" } }} />
           </div>
 
-          <Button type="submit">{t("pay")}</Button>
+          <Button type="submit" disabled={isLoading || !stripe || !elements}>
+            <Loader2 className="animate-spin" /> {t("pay")}
+          </Button>
         </div>
       </form>
     </Form>

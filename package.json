@@ -8,8 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "postinstall": "prisma generate",
-    "prisma": "dotenv -e .env.local -- pnpx prisma db push",
-    "prisma:update": "dotenv -e .env.local -- pnpx prisma generate",
+    "prisma:push": "dotenv -e .env.local -- pnpx prisma db push",
+    "prisma:generate": "dotenv -e .env.local -- pnpx prisma generate",
     "prisma:studio": "dotenv -e .env.local -- pnpx prisma studio"
   },
   "dependencies": {
