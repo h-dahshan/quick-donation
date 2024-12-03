@@ -55,7 +55,7 @@ export default function DonationForm() {
           amount: z.enum(["50", "100", "200", "other"], {
             message: t("required"),
           }),
-          customAmount: z.number().min(1, t("required")),
+          customAmount: z.number(),
           coverFee: z.boolean(),
         })
         .superRefine(({ amount, customAmount }, ctx) => {
