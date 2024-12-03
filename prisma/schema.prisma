@@ -8,8 +8,8 @@ datasource db {
 }
 
 model Donations {
-    id          String  @id @default(cuid())
-    intentId    String
+    id          String  @id @default(uuid())
+    intentId    String  @unique
     name        String
     email       String
     mobile      String
