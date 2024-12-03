@@ -37,6 +37,8 @@ export default async function handler(
   // Run the middleware
   await runMiddleware(req, res);
 
+  console.log("Webhook Received:", req);
+
   if (req.method === "POST") {
     const sig = req.headers["stripe-signature"];
     if (!sig) return;
@@ -49,7 +51,7 @@ export default async function handler(
       return res.status(400).send(`Webhook Error: ${err}`);
     }
 
-    console.log(event);
+    console.log("Event:", event);
 
     // Handle the event
     if (event.type === "payment_intent.succeeded") {
@@ -71,6 +73,8 @@ export default async function handler(
 
     res.status(200).json({ received: true });
   } else {
+    console.log("Webhook Rejected");
+
     res.setHeader("Allow", "POST");
     res.status(405).end("Method Not Allowed");
   }
