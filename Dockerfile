@@ -24,7 +24,7 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 # This will do the trick, use the corresponding env file for each environment.
-COPY .env.local .env.production
+COPY .env.local .env
 
 ENV NODE_ENV production
 # Next.js collects completely anonymous telemetry data about general usage.
