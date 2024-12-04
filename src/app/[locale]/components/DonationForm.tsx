@@ -19,7 +19,7 @@ import {
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Checkbox } from "@/components/ui/checkbox";
+// import { Checkbox } from "@/components/ui/checkbox";
 import { Separator } from "@/components/ui/separator";
 import { Progress } from "@/components/ui/progress";
 import { Loader2 } from "lucide-react";
@@ -227,6 +227,8 @@ export default function DonationForm() {
                   <FormControl>
                     <Input
                       {...rest}
+                      type="number"
+                      inputMode="numeric"
                       value={value || ""}
                       onChange={(e) =>
                         form.setValue(
@@ -266,7 +268,7 @@ export default function DonationForm() {
               <FormItem>
                 <FormLabel required>{t("email")}</FormLabel>
                 <FormControl>
-                  <Input {...field} />
+                  <Input type="email" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -279,7 +281,7 @@ export default function DonationForm() {
               <FormItem>
                 <FormLabel required>{t("mobile")}</FormLabel>
                 <FormControl>
-                  <Input {...field} />
+                  <Input type="tel" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -328,7 +330,7 @@ export default function DonationForm() {
 
         <Separator className="my-6" />
 
-        <FormSection label={t("feeCoverage")}>
+        {/* <FormSection label={t("feeCoverage")}>
           <FormField
             control={form.control}
             name="coverFee"
@@ -355,7 +357,7 @@ export default function DonationForm() {
           />
         </FormSection>
 
-        <Separator className="my-6" />
+        <Separator className="my-6" /> */}
 
         <div className="flex flex-col justify-between gap-4">
           <p>

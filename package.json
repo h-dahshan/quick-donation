@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postinstall": "prisma generate",
+    "postinstall": "prisma generate --no-engine",
     "prisma:push": "dotenv -e .env.local -- pnpx prisma db push",
     "prisma:generate": "dotenv -e .env.local -- pnpx prisma generate",
     "prisma:studio": "dotenv -e .env.local -- pnpx prisma studio"
