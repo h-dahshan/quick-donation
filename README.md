@@ -1,4 +1,4 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# This is a quick donation app that enables receiving donations through a donation form and Stripe, persisting them in a DB, updating them once transactions are succeeded, and shows progress of what has been raised from targeted donations
 
 ## Getting Started
 
@@ -29,8 +29,24 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
+## Deployment Requirements
+
+This app depends on environment varaibles which are a must to work properly and they are read from `.env` file like these in `.env.example` file which contains keys for the following:
+
+- `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`: used in the app's Frontend, obtain this from your Stripe account,
+- `STRIPE_SECRET_KEY`: used at server APIs, obtain this from your Stripe account,
+- `STRIPE_WEBHOOK_SECRET`: used to handle Stripe events webhooks (currently supporting PaymentIntentSuccess), configure webhook and obtain the key from your Stripe account, webhooks configs should POST to **${domain}**`/api/webhooks`
+- `DATABASE_URL`: used to handle app's data, currently connected to Prisma Postgres, obtain this from your Prisma account.
+
 ## Deploy on Vercel
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Deploy with Docker
+
+The app has a Docker file which builds the app and handles Prisma DB schema migration and client generation, you can run the following docker commands to try it:
+
+1. Build: `docker build -t my-app .`
+2. Running a Container: `docker run -p 3000:3000 my-app`
