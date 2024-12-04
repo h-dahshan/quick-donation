@@ -1,4 +1,8 @@
-# This is a quick donation app that enables receiving donations through a donation form and Stripe, persisting them in a DB, updating them once transactions are succeeded, and shows progress of what has been raised from targeted donations
+# Donation App
+
+## Breif
+
+This is a quick donation app that enables receiving donations through a donation form and Stripe, persisting them in a DB, updating them once transactions are succeeded, and shows progress of what has been raised from targeted donations
 
 ## Getting Started
 
