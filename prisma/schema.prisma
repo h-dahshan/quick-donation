@@ -20,4 +20,5 @@ model Donations {
     donation    Float          
     coverFee    Boolean
     paid        Boolean @default(false)
+    createdAt   DateTime @default(now())
 }
