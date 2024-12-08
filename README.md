@@ -40,7 +40,8 @@ This app depends on environment varaibles which are a must to work properly and 
 - `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`: used in the app's Frontend, obtain this from your Stripe account,
 - `STRIPE_SECRET_KEY`: used at server APIs, obtain this from your Stripe account,
 - `STRIPE_WEBHOOK_SECRET`: used to handle Stripe events webhooks (currently supporting PaymentIntentSuccess), configure webhook and obtain the key from your Stripe account, webhooks configs should POST to **${domain}**`/api/webhooks`
-- `DATABASE_URL`: used to handle app's data, currently connected to Prisma Postgres, obtain this from your Prisma account.
+- `DATABASE_URL`: used to persist app's data, with DB connection pooling, currently connected to Prisma Postgres, obtain this from your Prisma/Provider account.
+- `DATABASE_DIRECT_URL`: may be required in some cases like using Supabase instead of PrismaPostgres
 
 ## Deploy on Vercel
 
