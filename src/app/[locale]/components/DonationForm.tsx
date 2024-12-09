@@ -22,6 +22,7 @@ import { Input } from "@/components/ui/input";
 // import { Checkbox } from "@/components/ui/checkbox";
 import { Separator } from "@/components/ui/separator";
 import { Progress } from "@/components/ui/progress";
+import { PhoneInput } from "@/components/ui/phone-input";
 import { Loader2 } from "lucide-react";
 
 import FormSection from "./FormSection";
@@ -32,6 +33,8 @@ import {
   useElements,
   useStripe,
 } from "@stripe/react-stripe-js";
+
+import { isValidPhoneNumber } from "react-phone-number-input";
 
 const i18nCurrency = new Intl.NumberFormat("de-DE", {
   style: "currency",
@@ -56,7 +59,12 @@ export default function DonationForm() {
         .object({
           name: z.string().min(1, t("required")),
           email: z.string().min(1, t("required")).email(t("invalidEmail")),
-          mobile: z.string().min(1, t("required")),
+          mobile: z
+            .string()
+            .min(1, t("required"))
+            .refine((mob) => isValidPhoneNumber(mob), {
+              message: t("invalidMobile"),
+            }),
           street: z.string().min(1, t("required")),
           city: z.string().min(1, t("required")),
           country: z.string().min(1, t("required")),
@@ -281,7 +289,7 @@ export default function DonationForm() {
               <FormItem>
                 <FormLabel required>{t("mobile")}</FormLabel>
                 <FormControl>
-                  <Input type="tel" {...field} />
+                  <PhoneInput defaultCountry="DE" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

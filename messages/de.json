@@ -27,6 +27,7 @@
     "country": "Land",
     "required": "Dieses Feld ist erforderlich",
     "invalidEmail": "Diese E-Mail ist ungültig",
+    "invalidMobile": "Diese Telefonnummer ist ungültig",
 
     "checkout": "Bezahlen",
     "pay": "Jetzt bezahlen",
