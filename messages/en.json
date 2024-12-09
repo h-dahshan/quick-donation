@@ -27,6 +27,7 @@
     "country": "Country",
     "required": "This field is required",
     "invalidEmail": "This email is invalid",
+    "invalidMobile": "This phone number is invalid",
 
     "checkout": "Checkout",
     "pay": "Pay Now",
