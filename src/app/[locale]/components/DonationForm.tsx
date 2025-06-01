@@ -125,19 +125,24 @@ export default function DonationForm() {
     try {
       if (!stripe || !elements) return null;
 
-      // call server action to make a payment intent
-      const { data } = await axios.post("/api/create-payment-intent", {
-        data: payload,
-      });
+      elements.submit().then(async ({ error }) => {
+        if (error) {
+          console.log(error);
+          return;
+        }
 
-      elements.submit();
+        // call server action to make a payment intent
+        const { data } = await axios.post("/api/create-payment-intent", {
+          data: payload,
+        });
 
-      await stripe?.confirmPayment({
-        elements,
-        clientSecret: data,
-        confirmParams: {
-          return_url: `${window.origin}/${locale}/feedback`,
-        },
+        await stripe?.confirmPayment({
+          elements,
+          clientSecret: data,
+          confirmParams: {
+            return_url: `${window.origin}/${locale}/feedback`,
+          },
+        });
       });
     } catch (error) {
       console.log(error);
